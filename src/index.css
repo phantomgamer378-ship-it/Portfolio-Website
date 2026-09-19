@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-background: #0a0a0a;
+  --color-foreground: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-accent: #6366f1; /* Restrained blue-violet accent */
+  --color-accent-hover: #4f46e5;
+  --color-border: #27272a;
+  --color-card: #18181b;
+  --color-card-hover: #27272a;
+
+  /* Fonts */
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Layout/Spacing */
+  --spacing-section: 6rem;
+  --container-max-width: 1440px;
+
+  /* Breakpoints (default tailwind breakpoints are usually fine, but specifying if needed) */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 390px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1920px;
+}
+
+@layer base {
+  :root {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    /* Focus styles */
+    --focus-ring-color: var(--color-accent);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+    /* Subtle noise overlay could be done with a pseudo-element if needed */
+  }
+
+  /* Improved focus visibility */
+  *:focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 4px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
