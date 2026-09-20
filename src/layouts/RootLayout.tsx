@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { Suspense } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { AmbientCursor } from "../components/layout/AmbientCursor";
 import { Navigation } from "../components/layout/Navigation";
 import { getPageTransition } from "../lib/motion";
 
@@ -18,7 +17,6 @@ export const RootLayout = () => {
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-clip">
-      <AmbientCursor />
       <Navigation />
       <AnimatePresence mode="wait">
         <motion.main 
