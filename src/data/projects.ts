@@ -44,5 +44,51 @@ export const projects = [
     technologies: [],
     achievements: [],
     repository: "https://github.com/phantomgamer378-ship-it/bias-env"
+  },
+  {
+    slug: "bustro",
+    title: "BUSTRO-",
+    subtitle: "Details to be added",
+    team: null,
+    concept: "Details to be added",
+    features: [],
+    technologies: [],
+    achievements: [],
+    repository: "https://github.com/phantomgamer378-ship-it/BUSTRO-"
+  },
+  {
+    slug: "guardianshield",
+    title: "GUARDIANSHIELD",
+    subtitle: "AI-powered scam & threat detection API",
+    team: null,
+    concept: "GuardianShield is an AI-powered scam and threat detection API designed to secure environments.",
+    features: [],
+    technologies: [],
+    achievements: [],
+    repository: "https://github.com/phantomgamer378-ship-it/guardianshield",
+    demo: "https://guardianshield-v3.netlify.app"
+  },
+  {
+    slug: "under-dox",
+    title: "UNDER_DOX",
+    subtitle: "hackwork repo",
+    team: null,
+    concept: "hackwork repo",
+    features: [],
+    technologies: [],
+    achievements: [],
+    repository: "https://github.com/phantomgamer378-ship-it/UNDER_DOX"
+  },
+  {
+    slug: "before-eat-app",
+    title: "BEFORE EAT APP",
+    subtitle: "Details to be added",
+    team: null,
+    concept: "Details to be added",
+    features: [],
+    technologies: [],
+    achievements: [],
+    repository: null,
+    demo: "https://before-eat-app.netlify.app"
   }
 ];

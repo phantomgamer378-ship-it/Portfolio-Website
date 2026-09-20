@@ -41,6 +41,12 @@ export const WorkDetail = () => {
                   value={<ExternalLink href={project.repository}>GitHub</ExternalLink>} 
                 />
               )}
+              {(project as any).demo && (
+                <TechnicalLabel 
+                  label="Demo" 
+                  value={<ExternalLink href={(project as any).demo}>Live Demo</ExternalLink>} 
+                />
+              )}
             </div>
           </header>
 

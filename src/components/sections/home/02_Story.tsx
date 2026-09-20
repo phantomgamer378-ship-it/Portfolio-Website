@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Container } from "../../ui/Container";
+import { AvatarPortrait } from "../../portfolio/AvatarPortrait";
 
 const STORY_ITEMS = [
   "Gaming",
@@ -31,6 +32,9 @@ export const Story = () => {
           {/* Left: Sticky Visual Title */}
           <div className="hidden md:block">
             <div className="sticky top-1/2 -translate-y-1/2">
+              <div className="mb-8">
+                <AvatarPortrait variant="story" />
+              </div>
               <h2 className="font-sans text-4xl md:text-5xl font-bold tracking-tighter text-foreground mb-4">
                 HOW I GOT HERE
               </h2>
@@ -43,11 +47,14 @@ export const Story = () => {
 
           {/* Right: Scrolling Narrative */}
           <div className="relative">
-            <div className="md:hidden mb-12">
-              <h2 className="font-sans text-4xl font-bold tracking-tighter text-foreground mb-4">
-                HOW I GOT HERE
-              </h2>
-              <div className="h-px w-24 bg-accent/50" />
+            <div className="md:hidden mb-12 flex flex-col gap-6">
+              <AvatarPortrait variant="story" />
+              <div>
+                <h2 className="font-sans text-4xl font-bold tracking-tighter text-foreground mb-4">
+                  HOW I GOT HERE
+                </h2>
+                <div className="h-px w-24 bg-accent/50" />
+              </div>
             </div>
 
             {/* Line connecting the items */}

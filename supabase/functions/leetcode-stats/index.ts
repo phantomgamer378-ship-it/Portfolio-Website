@@ -36,19 +36,6 @@ const setCachedStats = async (platform: string, handle: string, statsData: any, 
   });
 };
 
-const MOCK_LEETCODE_DATA = {
-  totalSolved: 142,
-  easy: 80,
-  medium: 52,
-  hard: 10,
-  streak: 15,
-  badges: ["100 Days Badge", "Algorithm I"],
-  recentActivity: [
-    { title: "Two Sum", difficulty: "Easy", date: "2026-09-19" },
-    { title: "Add Two Numbers", difficulty: "Medium", date: "2026-09-18" }
-  ]
-};
-
 serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   
@@ -70,10 +57,26 @@ serve(async (req) => {
       return new Response(JSON.stringify(cache.data), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
     
-    await new Promise(resolve => setTimeout(resolve, 600));
-    await setCachedStats('leetcode', handle, MOCK_LEETCODE_DATA, 'success', null, 240);
+    // Fetch from public LeetCode stats API
+    const res = await fetch(`https://leetcode-stats-api.herokuapp.com/${handle}`);
+    if (!res.ok) throw new Error("Failed to fetch LeetCode data");
     
-    return new Response(JSON.stringify(MOCK_LEETCODE_DATA), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    const data = await res.json();
+    if (data.status === "error") throw new Error(data.message || "User not found");
+
+    const finalData = {
+      totalSolved: data.totalSolved || 0,
+      easy: data.easySolved || 0,
+      medium: data.mediumSolved || 0,
+      hard: data.hardSolved || 0,
+      streak: 0, // Not provided by this API
+      badges: [], // Not provided
+      recentActivity: [] // Not provided by this simple API, could use GraphQL for full details
+    };
+
+    await setCachedStats('leetcode', handle, finalData, 'success', null, 240);
+    
+    return new Response(JSON.stringify(finalData), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   } catch (error: any) {
     console.error('LeetCode stats error:', error);
     

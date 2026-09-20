@@ -4,6 +4,7 @@ import { Container } from "../../ui/Container";
 import { Button } from "../../ui/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { socials } from "../../../data/socials";
+import { AvatarPortrait } from "../../portfolio/AvatarPortrait";
 
 export const Intro = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -50,62 +51,69 @@ export const Intro = () => {
   return (
     <section id="intro" className="relative min-h-[100svh] flex items-center pt-24 pb-12 overflow-hidden border-b border-border/30">
       <Container>
-        <div className="max-w-4xl relative">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-7xl relative">
           
-          {/* Initial Name Flash */}
-          {!skipAnimation && (
+          <div className="max-w-4xl relative order-2 lg:order-1">
+            {/* Initial Name Flash */}
+            {!skipAnimation && (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={vishalVariant}
+                className="absolute inset-0 z-10 flex items-start"
+              >
+                <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[1.1]">
+                  Vishal Chauhan
+                </h1>
+              </motion.div>
+            )}
+
+            {/* Main Statement */}
+            <div className="mb-12">
+              <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1]">
+                <motion.span custom={0} initial="hidden" animate="visible" variants={lineVariant} className="block text-muted">I BUILD.</motion.span>
+                <motion.span custom={1} initial="hidden" animate="visible" variants={lineVariant} className="block text-muted">I BREAK.</motion.span>
+                <motion.span custom={2} initial="hidden" animate="visible" variants={lineVariant} className="block text-muted">I UNDERSTAND.</motion.span>
+                <motion.span custom={3} initial="hidden" animate="visible" variants={lineVariant} className="block text-accent">I BUILD AGAIN.</motion.span>
+              </h1>
+            </div>
+
+            {/* Identity & Details */}
             <motion.div
               initial="hidden"
               animate="visible"
-              variants={vishalVariant}
-              className="absolute inset-0 z-10 flex items-start"
+              variants={restVariant}
+              className="flex flex-col gap-6 mb-12 border-l-2 border-border pl-6"
             >
-              <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[1.1]">
-                Vishal Chauhan
-              </h1>
+              <div>
+                <h2 className="text-xl font-sans font-medium text-foreground mb-1">Vishal Chauhan</h2>
+                <p className="font-mono text-sm text-muted">BTech CS & IT</p>
+                <p className="font-mono text-sm text-muted">ADYPU &middot; 2029</p>
+              </div>
             </motion.div>
-          )}
 
-          {/* Main Statement */}
-          <div className="mb-12">
-            <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1]">
-              <motion.span custom={0} initial="hidden" animate="visible" variants={lineVariant} className="block text-muted">I BUILD.</motion.span>
-              <motion.span custom={1} initial="hidden" animate="visible" variants={lineVariant} className="block text-muted">I BREAK.</motion.span>
-              <motion.span custom={2} initial="hidden" animate="visible" variants={lineVariant} className="block text-muted">I UNDERSTAND.</motion.span>
-              <motion.span custom={3} initial="hidden" animate="visible" variants={lineVariant} className="block text-accent">I BUILD AGAIN.</motion.span>
-            </h1>
+            {/* CTAs */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={restVariant}
+              className="flex flex-wrap items-center gap-4"
+            >
+              <RouterLink to="/work">
+                <Button variant="primary" size="lg">Explore My Work</Button>
+              </RouterLink>
+              {socials.resume !== "#" && (
+                <a href={socials.resume} target="_blank" rel="noreferrer">
+                  <Button variant="outline" size="lg">View Resume</Button>
+                </a>
+              )}
+            </motion.div>
+          </div>
+          
+          <div className="flex justify-center lg:justify-end order-1 lg:order-2 w-full pt-12 lg:pt-0">
+            <AvatarPortrait variant="hero" priority={true} />
           </div>
 
-          {/* Identity & Details */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={restVariant}
-            className="flex flex-col gap-6 mb-12 border-l-2 border-border pl-6"
-          >
-            <div>
-              <h2 className="text-xl font-sans font-medium text-foreground mb-1">Vishal Chauhan</h2>
-              <p className="font-mono text-sm text-muted">BTech CS & IT</p>
-              <p className="font-mono text-sm text-muted">ADYPU &middot; 2029</p>
-            </div>
-          </motion.div>
-
-          {/* CTAs */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={restVariant}
-            className="flex flex-wrap items-center gap-4"
-          >
-            <RouterLink to="/work">
-              <Button variant="primary" size="lg">Explore My Work</Button>
-            </RouterLink>
-            {socials.resume !== "#" && (
-              <a href={socials.resume} target="_blank" rel="noreferrer">
-                <Button variant="outline" size="lg">View Resume</Button>
-              </a>
-            )}
-          </motion.div>
         </div>
       </Container>
     </section>

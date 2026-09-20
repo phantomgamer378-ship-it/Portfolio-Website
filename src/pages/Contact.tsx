@@ -13,13 +13,13 @@ export const Contact = () => {
           <SectionHeading level={1} subhead="Reach Out" className="mb-12">
             Contact
           </SectionHeading>
-          
+
           <p className="text-muted text-lg mb-12 max-w-lg">
             I am always open to discussing new opportunities, exploring interesting technologies, or talking about security and system architectures.
           </p>
-          
+
           <div className="flex flex-col gap-8 border-t border-border/50 pt-12">
-            
+
             <div className="flex flex-col gap-2">
               <span className="font-mono text-sm text-accent uppercase tracking-widest">Email</span>
               {socials.email && socials.email !== "#" ? (
@@ -27,7 +27,7 @@ export const Contact = () => {
                   {socials.email}
                 </a>
               ) : (
-                <span className="text-2xl font-sans font-medium text-muted">Placeholder@email.com</span>
+                <span className="text-2xl font-sans font-medium text-muted">vishalchauhangg404@gmail.com</span>
               )}
             </div>
 
@@ -37,20 +37,20 @@ export const Contact = () => {
                 {socials.linkedin && socials.linkedin !== "#" ? (
                   <ExternalLink href={socials.linkedin} className="text-lg">Vishal Chauhan</ExternalLink>
                 ) : (
-                  <span className="text-lg font-mono text-muted">linkedin.com/in/placeholder</span>
+                  <span className="text-lg font-mono text-muted">www.linkedin.com/in/vishal-chauhan-663a683ab</span>
                 )}
               </div>
-              
+
               <div className="flex flex-col gap-2">
                 <span className="font-mono text-sm text-accent uppercase tracking-widest">GitHub</span>
                 {socials.github && socials.github !== "#" ? (
-                  <ExternalLink href={socials.github} className="text-lg">github.com/placeholder</ExternalLink>
+                  <ExternalLink href={socials.github} className="text-lg">https://github.com/phantomgamer378-ship-it</ExternalLink>
                 ) : (
-                  <span className="text-lg font-mono text-muted">github.com/placeholder</span>
+                  <span className="text-lg font-mono text-muted">github</span>
                 )}
               </div>
             </div>
-            
+
           </div>
         </motion.div>
       </Container>
