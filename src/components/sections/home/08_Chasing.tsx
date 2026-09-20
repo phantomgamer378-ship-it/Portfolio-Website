@@ -12,6 +12,13 @@ const PROGRESSION = [
   "DEEP LEARNING"
 ];
 
+const PROGRESSION_COLORS = {
+  muted: "#a1a1aa",
+  foreground: "#f4f4f5",
+  border: "#27272a",
+  accent: "#14b8a6",
+};
+
 export const Chasing = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -69,8 +76,8 @@ function ProgressionNode({ item, progress, threshold }: { item: string, progress
   // We use a small range around the threshold for the transition
   const opacity = useTransform(progress, [threshold - 0.1, threshold], [0.3, 1]);
   const scale = useTransform(progress, [threshold - 0.1, threshold], [0.8, 1]);
-  const color = useTransform(progress, [threshold - 0.1, threshold], ["hsl(var(--muted))", "hsl(var(--foreground))"]);
-  const borderColor = useTransform(progress, [threshold - 0.1, threshold], ["hsl(var(--border))", "hsl(var(--accent))"]);
+  const color = useTransform(progress, [threshold - 0.1, threshold], [PROGRESSION_COLORS.muted, PROGRESSION_COLORS.foreground]);
+  const borderColor = useTransform(progress, [threshold - 0.1, threshold], [PROGRESSION_COLORS.border, PROGRESSION_COLORS.accent]);
 
   return (
     <div className="relative py-12 flex items-center justify-center">

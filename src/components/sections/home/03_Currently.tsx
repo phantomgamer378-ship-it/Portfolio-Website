@@ -14,7 +14,7 @@ const CURRENT_ITEMS = [
 
 export const Currently = () => {
   return (
-    <section id="currently" className="relative py-32 border-b border-border/30 bg-muted/20">
+    <section id="currently" className="relative overflow-hidden py-32 border-b border-border/30 bg-muted/20">
       <Container>
         <div className="mb-24">
           <h2 className="font-sans text-4xl md:text-5xl font-bold tracking-tighter text-foreground mb-4">
@@ -48,7 +48,7 @@ function CurrentlyItem({ item, index }: { item: typeof CURRENT_ITEMS[0], index: 
 
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.2, 1, 0.2]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
-  const x = useTransform(scrollYProgress, [0, 0.5, 1], [0, 20, 0]);
+  const x = useTransform(scrollYProgress, [0, 0.5, 1], [0, 12, 0]);
 
   return (
     <motion.div 

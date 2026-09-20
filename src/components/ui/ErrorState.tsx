@@ -1,5 +1,5 @@
 import { AlertTriangle, RefreshCcw } from 'lucide-react';
-import { Button } from './Button';
+import { Button, ButtonLink } from './Button';
 
 interface ErrorStateProps {
   message: string;
@@ -29,9 +29,7 @@ export const ErrorState = ({ message, onRetry, profileUrl, platformName }: Error
           </Button>
         )}
         {profileUrl && (
-          <a href={profileUrl} target="_blank" rel="noreferrer">
-            <Button variant="outline" size="sm">View Profile</Button>
-          </a>
+          <ButtonLink href={profileUrl} target="_blank" variant="outline" size="sm">View Profile</ButtonLink>
         )}
       </div>
     </div>

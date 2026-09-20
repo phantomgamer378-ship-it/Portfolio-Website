@@ -41,10 +41,10 @@ export const WorkDetail = () => {
                   value={<ExternalLink href={project.repository}>GitHub</ExternalLink>} 
                 />
               )}
-              {(project as any).demo && (
+              {project.demo && (
                 <TechnicalLabel 
                   label="Demo" 
-                  value={<ExternalLink href={(project as any).demo}>Live Demo</ExternalLink>} 
+                  value={<ExternalLink href={project.demo}>Live Demo</ExternalLink>} 
                 />
               )}
             </div>

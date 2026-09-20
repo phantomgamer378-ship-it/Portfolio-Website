@@ -1,8 +1,7 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Container } from "../ui/Container";
-import { Button } from "../ui/Button";
-import { Link as RouterLink } from "react-router-dom";
+import { ButtonLink } from "../ui/Button";
 import { profile } from "../../data/profile";
 import { socials } from "../../data/socials";
 
@@ -109,13 +108,9 @@ export const Hero = () => {
             variants={restVariant}
             className="flex flex-wrap items-center gap-4"
           >
-            <RouterLink to="/work">
-              <Button variant="primary" size="lg">Explore My Work</Button>
-            </RouterLink>
+            <ButtonLink to="/work" variant="primary" size="lg">Explore My Work</ButtonLink>
             {socials.resume !== "#" && (
-              <a href={socials.resume} target="_blank" rel="noreferrer">
-                <Button variant="outline" size="lg">View Resume</Button>
-              </a>
+              <ButtonLink href={socials.resume} target="_blank" variant="outline" size="lg">View Resume</ButtonLink>
             )}
           </motion.div>
         </div>

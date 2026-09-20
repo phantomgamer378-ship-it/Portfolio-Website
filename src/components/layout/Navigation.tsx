@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Container } from "../ui/Container";
-import { Button } from "../ui/Button";
+import { ButtonLink } from "../ui/Button";
+import { socials } from "../../data/socials";
 
 const NAV_LINKS = [
   { label: "WORK", href: "/work" },
@@ -16,6 +17,8 @@ const NAV_LINKS = [
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const hasResume = socials.resume !== "#";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,18 +30,39 @@ export const Navigation = () => {
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    if (!isMobileMenuOpen) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [isMobileMenuOpen]);
+
+  const isActive = (href: string) => {
+    if (href === "/activity/github") return location.pathname.startsWith("/activity");
+    return location.pathname === href || location.pathname.startsWith(`${href}/`);
+  };
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border py-4" : "bg-transparent py-6"
+        className={`fixed left-0 right-0 top-0 z-40 transition-all duration-300 ${
+          isScrolled ? "border-b border-border bg-background/85 py-4 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl" : "bg-background/20 py-6 backdrop-blur-[2px]"
         }`}
       >
         <Container className="flex items-center justify-between">
@@ -56,16 +80,31 @@ export const Navigation = () => {
                 <li key={link.label}>
                   <Link
                     to={link.href}
-                    className="text-sm font-mono tracking-wider text-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-1 py-0.5 relative group"
+                    className={`group relative rounded-sm px-1 py-0.5 font-mono text-sm tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      isActive(link.href) ? "text-foreground" : "text-muted hover:text-foreground"
+                    }`}
+                    aria-current={isActive(link.href) ? "page" : undefined}
                   >
                     {link.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+                    <span
+                      className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ${
+                        isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
                   </Link>
                 </li>
               ))}
             </ul>
             <div className="w-px h-4 bg-border" />
-            <Button variant="outline" size="sm">Resume</Button>
+            {hasResume ? (
+              <ButtonLink href={socials.resume} target="_blank" variant="outline" size="sm">
+                Resume
+              </ButtonLink>
+            ) : (
+              <ButtonLink to="/contact" variant="outline" size="sm">
+                Let's Talk
+              </ButtonLink>
+            )}
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -89,7 +128,7 @@ export const Navigation = () => {
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 bg-background flex flex-col"
           >
-            <div className="flex items-center justify-between p-6">
+            <div className="flex items-center justify-between border-b border-border/50 p-6">
               <span className="font-sans font-bold text-xl tracking-tighter text-foreground">VC</span>
               <button
                 className="text-foreground p-2 -mr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
@@ -112,7 +151,10 @@ export const Navigation = () => {
                     <Link
                       to={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-3xl font-sans font-medium tracking-tight text-foreground hover:text-accent transition-colors block py-2"
+                      className={`block py-2 font-sans text-3xl font-medium tracking-tight transition-colors ${
+                        isActive(link.href) ? "text-accent" : "text-foreground hover:text-accent"
+                      }`}
+                      aria-current={isActive(link.href) ? "page" : undefined}
                     >
                       {link.label}
                     </Link>
@@ -124,7 +166,15 @@ export const Navigation = () => {
                   transition={{ delay: NAV_LINKS.length * 0.1 }}
                   className="mt-8"
                 >
-                  <Button variant="primary" size="lg" className="w-full justify-center">Resume</Button>
+                  {hasResume ? (
+                    <ButtonLink href={socials.resume} target="_blank" variant="primary" size="lg" className="w-full justify-center">
+                      Resume
+                    </ButtonLink>
+                  ) : (
+                    <ButtonLink to="/contact" variant="primary" size="lg" className="w-full justify-center">
+                      Let's Talk
+                    </ButtonLink>
+                  )}
                 </motion.li>
               </ul>
             </nav>

@@ -1,4 +1,22 @@
-export const projects = [
+export interface ProjectFeature {
+  name: string;
+  status: string;
+}
+
+export interface Project {
+  slug: string;
+  title: string;
+  subtitle: string;
+  team: string | null;
+  concept: string;
+  features: ProjectFeature[];
+  technologies: string[];
+  achievements: string[];
+  repository: string | null;
+  demo?: string | null;
+}
+
+export const projects: Project[] = [
   {
     slug: "vanirakshak",
     title: "VANIRAKSHAK",
@@ -77,12 +95,13 @@ export const projects = [
     features: [],
     technologies: [],
     achievements: [],
-    repository: "https://github.com/phantomgamer378-ship-it/UNDER_DOX"
+    repository: "https://github.com/phantomgamer378-ship-it/UNDER_DOX",
+    demo: null
   },
   {
     slug: "before-eat-app",
-    title: "BEFORE EAT APP",
-    subtitle: "Details to be added",
+    title: "BEFORE BITES",
+    subtitle: "Track the journey, not just the calories.",
     team: null,
     concept: "Details to be added",
     features: [],

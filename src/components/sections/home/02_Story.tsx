@@ -17,6 +17,11 @@ const STORY_ITEMS = [
   "Cybersecurity"
 ];
 
+const TIMELINE_COLORS = {
+  muted: "#a1a1aa",
+  foreground: "#f4f4f5",
+};
+
 export const Story = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -92,7 +97,7 @@ export const Story = () => {
 function StoryItem({ item, progress, range }: { item: string, progress: import("framer-motion").MotionValue<number>, range: [number, number] }) {
   const opacity = useTransform(progress, range, [0.3, 1]);
   const y = useTransform(progress, range, [20, 0]);
-  const color = useTransform(progress, range, ["hsl(var(--muted))", "hsl(var(--foreground))"]);
+  const color = useTransform(progress, range, [TIMELINE_COLORS.muted, TIMELINE_COLORS.foreground]);
 
   return (
     <motion.div 

@@ -1,4 +1,5 @@
 import { Container } from "../../ui/Container";
+import { motion } from "framer-motion";
 
 // These can later be fetched from Supabase
 const NOW_ITEMS = [
@@ -26,7 +27,12 @@ export const NowNext = () => {
         <div className="grid md:grid-cols-2 gap-24">
           
           {/* NOW */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="font-sans text-4xl md:text-5xl font-bold tracking-tighter text-foreground mb-4">
               NOW
             </h2>
@@ -34,20 +40,32 @@ export const NowNext = () => {
             
             <ul className="flex flex-col gap-6">
               {NOW_ITEMS.map((item, index) => (
-                <li key={`now-${index}`} className="flex items-center gap-4">
+                <motion.li
+                  key={`now-${index}`}
+                  initial={{ opacity: 0, x: -14 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: index * 0.04 }}
+                  className="flex items-center gap-4"
+                >
                   <span className="font-mono text-accent text-sm">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <span className="font-mono text-xl md:text-2xl text-foreground">
                     {item}
                   </span>
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* NEXT */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             <h2 className="font-sans text-4xl md:text-5xl font-bold tracking-tighter text-foreground mb-4">
               NEXT
             </h2>
@@ -55,17 +73,25 @@ export const NowNext = () => {
             
             <ul className="flex flex-col gap-6">
               {NEXT_ITEMS.map((item, index) => (
-                <li key={`next-${index}`} className="flex items-center gap-4 opacity-60 hover:opacity-100 transition-opacity">
+                <motion.li
+                  key={`next-${index}`}
+                  initial={{ opacity: 0, x: -14 }}
+                  whileInView={{ opacity: 0.6, x: 0 }}
+                  whileHover={{ opacity: 1, x: 4 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: index * 0.04 }}
+                  className="flex items-center gap-4"
+                >
                   <span className="font-mono text-muted text-sm">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <span className="font-mono text-xl md:text-2xl text-foreground">
                     {item}
                   </span>
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
         </div>
       </Container>

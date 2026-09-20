@@ -1,5 +1,6 @@
 import { ScrollNavigator, type SectionDescriptor } from "../components/layout/ScrollNavigator";
 import { Intro } from "../components/sections/home/01_Intro";
+import { IntroPortal } from "../components/sections/home/IntroPortal";
 import { Story } from "../components/sections/home/02_Story";
 import { Currently } from "../components/sections/home/03_Currently";
 import { Stack } from "../components/sections/home/04_Stack";
@@ -12,6 +13,7 @@ import { Contact } from "../components/sections/home/10_Contact";
 
 const HOME_SECTIONS: SectionDescriptor[] = [
   { id: "intro", title: "INTRO" },
+  { id: "again", title: "AGAIN" },
   { id: "story", title: "THE STORY" },
   { id: "currently", title: "CURRENTLY" },
   { id: "stack", title: "THE STACK" },
@@ -30,6 +32,7 @@ export const Home = () => {
       
       <main>
         <Intro />
+        <IntroPortal />
         <Story />
         <Currently />
         <Stack />

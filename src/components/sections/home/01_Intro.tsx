@@ -1,8 +1,7 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Container } from "../../ui/Container";
-import { Button } from "../../ui/Button";
-import { Link as RouterLink } from "react-router-dom";
+import { ButtonLink } from "../../ui/Button";
 import { socials } from "../../../data/socials";
 import { AvatarPortrait } from "../../portfolio/AvatarPortrait";
 
@@ -53,7 +52,7 @@ export const Intro = () => {
       <Container>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-7xl relative">
           
-          <div className="max-w-4xl relative order-2 lg:order-1">
+          <div className="max-w-4xl relative order-1">
             {/* Initial Name Flash */}
             {!skipAnimation && (
               <motion.div
@@ -99,18 +98,14 @@ export const Intro = () => {
               variants={restVariant}
               className="flex flex-wrap items-center gap-4"
             >
-              <RouterLink to="/work">
-                <Button variant="primary" size="lg">Explore My Work</Button>
-              </RouterLink>
+              <ButtonLink to="/work" variant="primary" size="lg">Explore My Work</ButtonLink>
               {socials.resume !== "#" && (
-                <a href={socials.resume} target="_blank" rel="noreferrer">
-                  <Button variant="outline" size="lg">View Resume</Button>
-                </a>
+                <ButtonLink href={socials.resume} target="_blank" variant="outline" size="lg">View Resume</ButtonLink>
               )}
             </motion.div>
           </div>
           
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2 w-full pt-12 lg:pt-0">
+          <div className="flex justify-center lg:justify-end order-2 w-full pt-4 lg:pt-0">
             <AvatarPortrait variant="hero" priority={true} />
           </div>
 
